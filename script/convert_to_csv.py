@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 
-with open("ewallet_playstore_reviews.json") as f:
+with open("./data/ewallet_playstore_reviews.json") as f:
     data = json.load(f)
 
 df = pd.DataFrame(data)
@@ -18,7 +18,5 @@ df["Sentiment"] = df["Rating"].apply(get_sentiment)
 
 df["ReviewLength"] = df["Review"].apply(lambda x: len(x.split()) if isinstance(x, str) else 0)
 df["ReviewCharCount"] = df["Review"].apply(lambda x: len(x) if isinstance(x, str) else 0)
-
-df = df[df["Sentiment"] != "Netral"]
 
 df.to_csv("ewallet_playstore_reviews.csv", index=False)
